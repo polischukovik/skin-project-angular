@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Leophilized pig skin XENOGRAFTS",
+    "size": "M",
+    "price": 10,
+    "position": 1,
+    "image": "product-1-400.png"
+  },
+  {
+    "name": "Leophilized pig skin XENOGRAFTS",
+    "size": "L",
+    "price": 15,
+    "position": 2,
+    "image": "product-1-400.png"
+  },
+  {
+    "name": "Leophilized pig skin XENOGRAFTS",
+    "size": "XL",
+    "price": 20,
+    "position": 3,
+    "image": "product-1-400.png"
+  }
+]
