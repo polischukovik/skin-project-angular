@@ -1,21 +1,40 @@
-<div class="container">
-    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    <i class="fas fa-xbox"></i> Skin-Site
-                </a>
-            </div>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-xbox"></i> Skin-Site
+      </a>
+    </div>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a ng-href="#">Home</a></li>
-                    <li><a ng-href="#">About</a></li>
-                    <li><a ng-href="#">Contact</a></li>
-                </ul>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+      <ul class="nav navbar-nav">
+        <li class="active"><a ng-href="#">Home</a></li>
+        <li><a ng-href="#">About</a></li>
+        <li><a ng-href="#">Contact</a></li>
+      </ul>
 
-            </div>
+    </div>
 
-        </div>
-    </nav>
-</div>
+    <div class="dropdown">
+      <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <i class="fas fa-shopping-cart"></i> Cart: 0
+      </div>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <table class="table">
+          <thead><tr><th>Cart</th><th>Quantity</th><th>Price</th></tr></thead>
+          <tbody>
+            <tr><td>Size S</td><td>3</td><td>30</td><td><button class="btn btn-default">-</button></td></tr>
+            <tr><td>Size M</td><td>4</td><td>45</td><td><button class="btn btn-default">-</button></td></tr>
+            <tr><td>Size L</td><td>1</td><td>20</td><td><button class="btn btn-default">-</button></td></tr>
+          </tbody>
+        </table>
+        <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+        <div class="dropdown-divider"></div>
+        <div class="row justify-content-center">
+        <button class="btn btn-success">Order</button>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
