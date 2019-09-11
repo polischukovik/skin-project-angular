@@ -1,27 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { ProductService } from '../product.service';
+
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
-  jsonURL = '../../assets/products.json';
+export class ProductsComponent implements OnInit{
+
   private products;
 
-  constructor(private http: HttpClient) {
-    this.getJSON().subscribe(data => {
-      this.products = data;
-     });
+  constructor(private productService: ProductService) {
+    this.get()
   }
 
   ngOnInit() {
+    this.productService.get()
+      .subscribe(products => {
+        this.products = products;
+     });
   }
 
-  public getJSON(): Observable<any> {
-    return this.http.get(this.jsonURL);
+  public get() {
+    return this.products;
   }
 
 }
