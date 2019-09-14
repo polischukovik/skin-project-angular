@@ -1,14 +1,14 @@
 <div class="container" style="margin-top: 1rem;">
   <div class="row justify-content-center">
-    <div class="card col-3" *ngFor="let product of products" style="margin-left: .2rem; margin-right: .2rem;">
-      <img class="card-img-top" src="./assets/images/{{product.image}}" alt="Card image cap">
+    <div class="card col-3" *ngFor="let product of products" style="margin-left: .2rem; margin-right: .2rem; background-color: rgb(209, 218, 243);">
+      <img class="card-img-top" src="./assets/images/{{product.image}}" alt="Card image cap" style="margin-top: 1rem;">
       <div class="card-body">
         <h5 class="card-title">{{product.name}}</h5>
         <p class="card-text"><strong>Price: </strong>{{product.price}} ₴</p>
         <p class="card-text"><strong>Size: </strong>{{product.size}}</p>
         <div class="container">
           <div class="row justify-content-center">
-            <a href="#" class="col-6 btn btn-secondary btn-margins" onclick="">To Cart</a>
+            <a [routerLink]="['/cart', { id:product.id }]" class="col-6 btn btn-secondary" style="width: max-content" onclick="">To Cart</a>
           </div>
         </div>
       </div>

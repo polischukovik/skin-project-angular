@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "p01",
     "name": "Leophilized pig skin XENOGRAFTS",
     "description": "High quality Lyophilized pig skin from Institute of biomedical technologies",
     "size": "M",
@@ -9,7 +9,7 @@
     "image": "product-1-400.png"
   },
   {
-    "id": 2,
+    "id": "p02",
     "name": "Leophilized pig skin XENOGRAFTS",
     "description": "High quality Lyophilized pig skin from Institute of biomedical technologies",
     "size": "L",
@@ -18,7 +18,7 @@
     "image": "product-1-400.png"
   },
   {
-    "id": 3,
+    "id": "p03",
     "name": "Leophilized pig skin XENOGRAFTS",
     "description": "High quality Lyophilized pig skin from Institute of biomedical technologies",
     "size": "XL",
