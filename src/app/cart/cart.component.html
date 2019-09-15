@@ -1,31 +1,32 @@
-<div class="container">
+<div class="container main-block">
   <h3>Cart Info</h3>
-  <table class="table" border="1">
-    <tr>
-      <th>Option</th>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Photo</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Sub Total</th>
-    </tr>
-    <tr *ngFor="let item of items">
-      <td align="center">
-        <a (click)="remove(item.product.id)">X</a>
-      </td>
-      <td>{{item.product.id}}</td>
-      <td>{{item.product.name}}</td>
-      <td>
-        <img src="../../assets/images/{{ item.product.image }}" width="50">
-      </td>
-      <td>{{item.product.price}}</td>
-      <td>{{item.quantity}}</td>
-      <td>{{item.product.price * item.quantity}}</td>
-    </tr>
-    <tr>
-      <td colspan="6" align="right">Total</td>
-      <td>{{total}}</td>
-    </tr>
+  <table class="table table-striped shadowed">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Size</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.product.size }}</td>
+        <td>{{ item.product.price }}</td>
+        <td>{{ item.quantity }}</td>
+        <td><button type="button" class="btn-rounded" (click)="remove(item.product)"><i
+              class="fas fa-times"></i></button></td>
+      </tr>
+      <tr>
+        <th align="right" colspan="4">Total</th>
+        <td><strong>{{total}}</strong></td>
+      </tr>
+    </tbody>
   </table>
+  <div class="row justify-content-center margin-top">
+    <br>
+    <button type="button" class="btn btn-success" [routerLink]="['/order']">Go to Delivery</button>
+  </div>
 </div>

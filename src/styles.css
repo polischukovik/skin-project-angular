@@ -1,8 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background-color: rgb(219, 226, 233);
+  background-color: #EAE7DC;
+  color: #8D8E8A;
 }
 
 nav {
-  background-color: rgb(176, 180, 189);
+  background-color: #D8C3A5;
+}
+
+.card {
+  margin: .2rem;
+  background-color: #EAE7DC;
+}
+
+.main-block  {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #D8C3A5;
+  color: #8D8E8A;
+  height: 80vh;
+}
+
+.main-block table {
+  background-color: rgb(249, 252, 253)
+}
+
+.margin-top {
+  margin-top: 1rem;
+}
+
+.btn {
+  background-color: #E98074;
+}
+
+.btn-rounded {
+  border-radius: 50%;
+}
+
+.shadowed {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
