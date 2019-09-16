@@ -5,10 +5,14 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './order.component.html'
 })
 export class OrderComponent implements OnInit {
+  
+  private cities = [];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+    
+
   }
 
 }
