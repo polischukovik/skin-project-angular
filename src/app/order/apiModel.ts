@@ -1,6 +1,6 @@
 export class Model{
     modelName: string;
     calledMethod: string;
-    methodProperties: Object;
+    methodProperties: object;
     apiKey: string;
 }
