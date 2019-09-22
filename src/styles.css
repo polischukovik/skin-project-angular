@@ -46,3 +46,10 @@ nav {
   border-top-right-radius: 0;
   border-top: 0;
 }
+
+.list-group{
+  max-height: 300px;
+  margin-bottom: 10px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}

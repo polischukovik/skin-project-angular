@@ -8,6 +8,7 @@ import { NovaPoshtaService } from './novaPoshta.service';
 export class OrderComponent implements OnInit {
 
   private cities = [];
+  private outlets = [];
   private orderCity = '';
 
   constructor(private npService: NovaPoshtaService) {}
@@ -19,6 +20,12 @@ export class OrderComponent implements OnInit {
       this.npService.getCities(input).subscribe( (data) => {
         this.cities = data;
       });
+    }
+  }
+
+  getOutlets(cityRef: string) {
+    this.npService.getOutlets(cityRef).subscribe( (data) => {
+      this.outlets = data;
     }
   }
 

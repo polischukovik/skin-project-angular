@@ -1,0 +1,15 @@
+<div class="dropdown">
+  <div (clickOutside)="showDropdown=false" class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default"> {{ inputName }}</span>
+    </div>
+    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+      [ngModel]="itemInput" (ngModelChange)="getCities($event);showDropdown=true"
+      placeholder="start typing then select from dropdown...">
+  </div>
+  <ul class="list-group" *ngIf="showDropdown">
+    <li ui-scroll="item in datasource"><a (click)="itemInput = item.Description" *ngFor="let item of items"
+        class="list-group-item list-group-item-action">{{ item.Description }}</a>
+    </li>
+  </ul>
+</div>

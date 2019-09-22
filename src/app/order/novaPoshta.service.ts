@@ -9,12 +9,6 @@ import { map } from 'rxjs/operators';
 export class NovaPoshtaService {
   private apiUrl = 'https://api.novaposhta.ua/v2.0/json/';
   private apiKey = '6d47ce01626bf190be73dbcd79e673ef';
-  private model: Model = {
-    modelName: 'Addresses',
-    calledMethod: 'getCities',
-    methodProperties: {FindByString: ''},
-    apiKey: this.apiKey
-  };
 
   constructor(private http: HttpClient) { }
 
@@ -27,13 +21,26 @@ export class NovaPoshtaService {
       },
       apiKey: this.apiKey
     };
-    return this.http.post<CitiesResponse>(this.apiUrl, body)
+    return this.http.post<Response>(this.apiUrl, body)
+      .pipe( map( result => result.data) );
+  }
+
+  getOutlets(cityRef: string) {
+    const body = {
+      modelName: 'AddressGeneral',
+      calledMethod: 'getWarehouses',
+      methodProperties: {
+        CityRef: cityRef
+      },
+      apiKey: this.apiKey
+    };
+    return this.http.post<Response>(this.apiUrl, body)
       .pipe( map( result => result.data) );
   }
 
 }
 
-interface CitiesResponse {
+interface Response {
   success: string;
   data: [];
 }
