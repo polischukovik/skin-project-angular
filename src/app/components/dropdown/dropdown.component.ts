@@ -6,6 +6,10 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
   styles: [`
+    .input-group-text {
+      width: 5rem;
+    }
+
     .list-group-item:first-child {
       border-top-left-radius: 0;
       border-top-right-radius: 0;

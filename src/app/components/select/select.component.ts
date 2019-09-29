@@ -3,7 +3,12 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-select',
-  templateUrl: './select.component.html'
+  templateUrl: './select.component.html',
+  styles: [`
+    .input-group-text {
+      width: 5rem;
+    }
+  `]
 })
 export class SelectComponent implements OnInit {
 
