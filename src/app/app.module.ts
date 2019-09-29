@@ -11,6 +11,7 @@ import { OrderComponent } from './order/order.component';
 import { FormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from './directives/clickOutside.directive';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { SelectComponent } from './components/select/select.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
     CartComponent,
     OrderComponent,
     ClickOutsideDirective,
-    DropdownComponent
+    DropdownComponent,
+    SelectComponent
   ],
   imports: [
     BrowserModule,

@@ -1,24 +1,15 @@
 <div class="container main-block">
   <h3>Order</h3>
 
-  <div class="dropdown">
-    <div (clickOutside)="showDropdown=false" class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-default">City</span>
-      </div>
-      <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
-        [ngModel]="cityInput" (ngModelChange)="getCities($event);showDropdown=true"
-        placeholder="start typing then select from dropdown...">
-    </div>
-    <ul class="list-group" *ngIf="showDropdown">
-      <li ui-scroll="item in datasource"><a (click)="cityInput = city.Description" *ngFor="let city of cities"
-          class="list-group-item list-group-item-action">{{ city.Description }}</a>
-      </li>
-    </ul>
-  </div>
-  <br>
   <app-dropdown
-    input-name="Outlet"
+    input-name="City"
     [getService]="getCities">
   </app-dropdown>
+
+  <app-select
+    input-name="Outlet"
+    [input-param]="cityInput"
+    [getService]="getOutlets">
+  </app-select>
+
 </div>

@@ -7,26 +7,12 @@ import { NovaPoshtaService } from './novaPoshta.service';
 })
 export class OrderComponent implements OnInit {
 
-  private cities = [];
-  private outlets = [];
   private orderCity = '';
+  private getCities = (param) => this.npService.getCities(param);
+  private getOutlets = (param) => this.npService.getOutlets(param);
 
   constructor(private npService: NovaPoshtaService) {}
 
   ngOnInit() { }
-
-  getCities(input: string) {
-    if (input.length > 0) {
-      this.npService.getCities(input).subscribe( (data) => {
-        this.cities = data;
-      });
-    }
-  }
-
-  getOutlets(cityRef: string) {
-    this.npService.getOutlets(cityRef).subscribe( (data) => {
-      this.outlets = data;
-    }
-  }
 
 }

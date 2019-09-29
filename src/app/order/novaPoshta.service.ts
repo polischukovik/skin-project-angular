@@ -21,8 +21,7 @@ export class NovaPoshtaService {
       },
       apiKey: this.apiKey
     };
-    return this.http.post<Response>(this.apiUrl, body)
-      .pipe( map( result => result.data) );
+    return this.send(body);
   }
 
   getOutlets(cityRef: string) {
@@ -34,13 +33,18 @@ export class NovaPoshtaService {
       },
       apiKey: this.apiKey
     };
+    return this.send(body);
+  }
+
+  send(body: {}) {
     return this.http.post<Response>(this.apiUrl, body)
-      .pipe( map( result => result.data) );
+      .pipe( map( result => (result.success === false) ? [] : result.data ) );
   }
 
 }
 
 interface Response {
-  success: string;
+  success: boolean;
   data: [];
+  errors: [];
 }

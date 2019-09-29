@@ -1,0 +1,9 @@
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-default"> {{ inputName }}</span>
+  </div>
+
+  <select class="form-control" [ngModel]="itemInput" (ngModelChange)="get($event)" placeholder="select form dropdown">
+    <option *ngFor="let item of items" value="{{ item }}">{{ item }}</option>
+  </select>
+</div>

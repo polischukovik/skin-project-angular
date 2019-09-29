@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dropdown',
@@ -21,11 +23,17 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DropdownComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @Input('input-name') inputName: string;
-  @Input() getService;
+  @Input() getService: (param: any) => Observable<[]>;
+  @Output() value: string;
+
+  private items = [];
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  get(param) {
+    this.getService(param).subscribe( (data) => { this.items = data; });
+  }
 }
