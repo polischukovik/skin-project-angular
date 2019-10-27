@@ -2,13 +2,18 @@
   <h3>Order</h3>
 
   <app-dropdown
-    input-name="City"
-    [getService]="getCities">
+    input-name="Місто"
+    [getId]="getId"
+    [getValue]="getValue"
+    [getService]="getCities"
+    (selected)="onCitySelected($event)">
   </app-dropdown>
-
+  <br>
   <app-select
-    input-name="Outlet"
-    [input-param]="cityInput"
+    input-name="Відділення"
+    [getId]="getId"
+    [getValue]="getValue"
+    [value]="selectedCityRef"
     [getService]="getOutlets">
   </app-select>
 

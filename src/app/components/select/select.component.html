@@ -3,7 +3,7 @@
     <span class="input-group-text" id="inputGroup-sizing-default"> {{ inputName }}</span>
   </div>
 
-  <select class="form-control" [ngModel]="itemInput" (ngModelChange)="get($event)" placeholder="select form dropdown">
-    <option *ngFor="let item of items" value="{{ item }}">{{ item }}</option>
+  <select class="form-control" [ngModel]="itemInput" placeholder="select form dropdown">
+    <option *ngFor="let item of items" value="{{ getValue(item) }}">{{ getValue(item) }}</option>
   </select>
 </div>

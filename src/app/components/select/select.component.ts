@@ -14,9 +14,9 @@ export class SelectComponent implements OnInit {
 
   // tslint:disable-next-line:no-input-rename
   @Input('input-name') inputName: string;
-  // tslint:disable-next-line:no-input-rename
-  @Input('input-param') inputParam: string;
   @Input() getService: (param: string) => Observable<[]>;
+  @Input() getValue: () => string;
+  @Input() getId: () => string;
 
   private items = [];
 
@@ -25,7 +25,14 @@ export class SelectComponent implements OnInit {
   ngOnInit() {
   }
 
+  @Input()
+  public set value(val: string) {
+    if (val) {
+      this.get(val);
+    }
+  }
+
   get(param) {
-    this.getService(param).subscribe( (data) => { this.items = data; });
+    this.getService(param).subscribe( (data) =>  this.items = data );
   }
 }
