@@ -20,10 +20,10 @@ export class OrderComponent implements OnInit {
   ngOnInit() { }
 
   confirm() {
-    let dialogRef = this.dialog.open(UserProfileComponent, {
-      height: '400px',
-      width: '600px',
-    });
+    // let dialogRef = this.dialog.open(UserProfileComponent, {
+    //   height: '400px',
+    //   width: '600px',
+    // });
   }
 
   onCitySelected(cityRef: string) {
@@ -37,23 +37,23 @@ interface NpItem {
   Description: string;
 }
 
-@Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: 'dialog-overview-example-dialog.html',
-})
-export class DialogOverviewExampleDialog {
+// @Component({
+//   selector: 'dialog-overview-example-dialog',
+//   templateUrl: 'dialog-overview-example-dialog.html',
+// })
+// export class DialogOverviewExampleDialog {
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+//   constructor(
+//     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+//     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
 
-}
+// }
 
-export interface DialogData {
-  animal: string;
-  name: string;
-}
+// export interface DialogData {
+//   animal: string;
+//   name: string;
+// }
