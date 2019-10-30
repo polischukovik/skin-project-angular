@@ -53,3 +53,11 @@ nav {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+.input-group-text {
+  width: 5rem;
+}
+
+.form-control.ng-touched.ng-invalid {
+  border: 1px solid red;
+}

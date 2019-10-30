@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from './directives/clickOutside.directive';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { SelectComponent } from './components/select/select.component';
+import {Ng2TelInputModule} from 'ng2-tel-input';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SelectComponent } from './components/select/select.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    Ng2TelInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,23 +1,46 @@
 <div class="container main-block">
   <h3>Order</h3>
 
-  <app-dropdown
-    input-name="Місто"
-    [getId]="getId"
-    [getValue]="getValue"
-    [getService]="getCities"
-    (selected)="onCitySelected($event)">
-  </app-dropdown>
-  <br>
-  <app-select
-    input-name="Відділення"
-    [getId]="getId"
-    [getValue]="getValue"
-    [value]="selectedCityRef"
-    [getService]="getOutlets">
-  </app-select>
-  <br>
-  <div class="mat-app-background basic-container">
-    <button (click)="confirm()">Підтвердити</button>
-  </div>
+  <form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">ПІБ</span>
+      </div>
+      <input required type="text" ngModel name="fullName" #fullName="ngModel" class="form-control"
+        placeholder="Прізвище Ім'я По батькові">
+    </div>
+
+    <div class="alert alert-danger" *ngIf="fullName.touched && !fullName.valid">Введіть ПІБ</div>
+    <br>
+
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Телефон</span>
+      </div>
+
+      <input type="text" class="form-control" name="phoneInput" ngModel ng2TelInput [ng2TelInputOptions]="{onlyCountries: ['ua']}"
+        (hasError)="hasError($event)" (ng2TelOutput)="getNumber($event)" (intlTelInputObject)="telInputObject($event)"
+        (countryChange)="onCountryChange($event)" />
+    </div>
+
+    <div class="alert alert-danger" [hidden]="phoneValid">Введіть коректний номер</div>
+
+    <br>
+
+    <app-dropdown input-name="Місто" [getId]="getId" [getValue]="getValue" [getService]="getCities"
+      (selected)="onCitySelected($event)">
+    </app-dropdown>
+    <br>
+    <app-select input-name="Відділення" [getId]="getId" [getValue]="getValue" [value]="selectedCityRef"
+      [getService]="getOutlets">
+    </app-select>
+    <br>
+
+    <div class="mat-app-background basic-container" *ngIf="!orderResult.valid">
+      <button type="submit" class="btn btn-primary">Підтвердити</button>
+    </div>
+    <div>
+      <h3 class="alert alert-success" *ngIf="orderResult.valid">{{orderResult.message}}</h3>
+    </div>
+  </form>
 </div>
