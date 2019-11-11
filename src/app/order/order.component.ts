@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { NovaPoshtaService } from './novaPoshta.service';
 import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 // import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
@@ -12,9 +13,10 @@ export class OrderComponent implements OnInit {
 
   constructor(private npService: NovaPoshtaService, private http: HttpClient) {}
 
-  private orderCity = '';
-  private orderResult = { valid: false, message: ''};
-  private phoneValid = true;
+  form: FormGroup;
+
+  private orderResult = { ready: false, message: ''};
+  formHasErrors = false;
 
   private selectedCityRef: string;
   private getCities = (param) => this.npService.getCities(param);
@@ -22,16 +24,29 @@ export class OrderComponent implements OnInit {
   private getId = (item: NpItem) => item.Ref;
   private getValue = (item: NpItem) => item.Description;
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.form = new FormGroup({
+      fullName: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.required),
+      city: new FormControl(''),
+      outlet: new FormControl('')
+    });
+    console.log(this.form);
+  }
 
   onSubmit(form) {
     console.log(form);
+    if (!form.hasError) {
+      this.confirm();
+    } else {
+      this.formHasErrors = true;
+    }
   }
 
   confirm() {
     const backendResponse = { code: 'OK', message: 'Заявка на Ваше замовлення № 34425'};
     this.orderResult.message = backendResponse.message;
-    this.orderResult.valid = true;
+    this.orderResult.ready = true;
     localStorage.clear();
   }
 
@@ -39,19 +54,6 @@ export class OrderComponent implements OnInit {
     this.selectedCityRef = cityRef;
   }
 
-  hasError(event) {
-    console.log(event);
-    this.phoneValid = event;
-  }
-
-  telInputObject(obj) {
-    this.telInputObject = obj;
-    console.log(obj);
-  }
-
-  getNumber(obj) {
-    console.log(obj);
-  }
 }
 
 interface NpItem {

@@ -1,16 +1,17 @@
 <div class="container main-block">
   <h3>Order</h3>
 
-  <form #orderForm="ngForm" (ngSubmit)="onSubmit(orderForm)">
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
     <div class="input-group">
-      <div class="input-group-prepend">
+      <div class="input-group-prepend" for="fullName">
         <span class="input-group-text">ПІБ</span>
       </div>
-      <input required type="text" ngModel name="fullName" #fullName="ngModel" class="form-control"
-        placeholder="Прізвище Ім'я По батькові">
+      <input type="text" class="form-control" id="fullName"
+        placeholder="Прізвище Ім'я По батькові" formControlName="fullName">
     </div>
 
-    <div class="alert alert-danger" *ngIf="fullName.touched && !fullName.valid">Введіть ПІБ</div>
+    <div [hidden]="form.controls.fullName.valid || !form.controls.fullName.touched" class="alert alert-danger">Введіть ПІБ</div>
+
     <br>
 
     <div class="input-group">
@@ -18,29 +19,31 @@
         <span class="input-group-text">Телефон</span>
       </div>
 
-      <input type="text" class="form-control" name="phoneInput" ngModel ng2TelInput [ng2TelInputOptions]="{onlyCountries: ['ua']}"
-        (hasError)="hasError($event)" (ng2TelOutput)="getNumber($event)" (intlTelInputObject)="telInputObject($event)"
-        (countryChange)="onCountryChange($event)" />
+      <input type="text" class="form-control" formControlName="phone"/>
     </div>
 
-    <div class="alert alert-danger" [hidden]="phoneValid">Введіть коректний номер</div>
+    <div [hidden]="form.controls.phone.valid || !form.controls.phone.touched" class="alert alert-danger">Введіть коректний номер</div>
 
     <br>
 
     <app-dropdown input-name="Місто" [getId]="getId" [getValue]="getValue" [getService]="getCities"
-      (selected)="onCitySelected($event)">
+      (selected)="onCitySelected($event)" formControlName="city">
     </app-dropdown>
     <br>
     <app-select input-name="Відділення" [getId]="getId" [getValue]="getValue" [value]="selectedCityRef"
-      [getService]="getOutlets">
+      [getService]="getOutlets" formControlName="outlet">
     </app-select>
     <br>
 
     <div class="mat-app-background basic-container" *ngIf="!orderResult.valid">
-      <button type="submit" class="btn btn-primary">Підтвердити</button>
+      <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Підтвердити</button>
     </div>
     <div>
-      <h3 class="alert alert-success" *ngIf="orderResult.valid">{{orderResult.message}}</h3>
+      <h3 [hidden]="!orderResult.ready" class="alert alert-success">{{orderResult.message}}</h3>
+    </div>
+
+    <div>
+      <h3 [hidden]="!formHasErrors" class="alert alert-danger">Замовлення містить помилки</h3>
     </div>
   </form>
 </div>

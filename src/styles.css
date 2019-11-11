@@ -58,6 +58,6 @@ nav {
   width: 5rem;
 }
 
-.form-control.ng-touched.ng-invalid {
+.ng-touched.ng-invalid {
   border: 1px solid red;
 }

@@ -9,10 +9,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { CartComponent } from './cart/cart.component';
 import { OrderComponent } from './order/order.component';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from './directives/clickOutside.directive';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { SelectComponent } from './components/select/select.component';
-import {Ng2TelInputModule} from 'ng2-tel-input';
+import { Ng2TelInputModule } from 'ng2-tel-input';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     Ng2TelInputModule
   ],
   providers: [],
