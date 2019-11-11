@@ -1,22 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background-color: #EAE7DC;
+  background-color: #ecfcff;
   color: #8D8E8A;
 }
 
 nav {
-  background-color: #D8C3A5;
+  background-color: #5edfff;
 }
 
 .card {
   margin: .2rem;
-  background-color: #EAE7DC;
+  background-color: #b2fcff;
 }
 
 .main-block  {
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   padding: 1rem;
-  background-color: #D8C3A5;
+  background-color: #5edfff;
   color: #8D8E8A;
   height: 80vh;
 }
@@ -30,7 +30,7 @@ nav {
 }
 
 .btn {
-  background-color: #E98074;
+  background-color: #3e64ff;
 }
 
 .btn-rounded {
