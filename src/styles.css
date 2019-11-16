@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background-color: #ecfcff;
+  background-color: #ffffff;
   color: #8D8E8A;
 }
 
@@ -16,7 +16,7 @@ nav {
 .main-block  {
   /* margin-top: 1rem; */
   padding: 1rem;
-  background-color: #5edfff;
+  background-color: #ffffff;
   color: #8D8E8A;
   height: 80vh;
 }
