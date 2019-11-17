@@ -5,12 +5,12 @@ body {
 }
 
 nav {
-  background-color: #5edfff;
+  background-color: #cdf5ff;
 }
 
 .card {
   margin: .2rem;
-  background-color: #b2fcff;
+  background-color: #f1ffff;
 }
 
 .main-block  {
@@ -30,7 +30,7 @@ nav {
 }
 
 .btn {
-  background-color: #3e64ff;
+  background-color: #a8b9ff;
 }
 
 .btn-rounded {

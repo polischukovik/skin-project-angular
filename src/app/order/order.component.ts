@@ -11,11 +11,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class OrderComponent implements OnInit {
 
-  constructor(private npService: NovaPoshtaService, private http: HttpClient) {}
+  constructor(private npService: NovaPoshtaService, private http: HttpClient) { }
 
   form: FormGroup;
 
-  private orderResult = { ready: false, message: ''};
+  private orderResult = { ready: false, message: '' };
   formHasErrors = false;
 
   private selectedCityRef: string;
@@ -44,7 +44,16 @@ export class OrderComponent implements OnInit {
   }
 
   confirm() {
-    const backendResponse = { code: 'OK', message: 'Заявка на Ваше замовлення № 34425'};
+    const products = this.allStorage();
+    console.log(products);
+    const message: Message = {
+      form: this.form.value,
+      products
+    };
+
+    console.log(message);
+
+    const backendResponse = { code: 'OK', message: 'Заявка на Ваше замовлення № 34425' };
     this.orderResult.message = backendResponse.message;
     this.orderResult.ready = true;
     localStorage.clear();
@@ -54,9 +63,27 @@ export class OrderComponent implements OnInit {
     this.selectedCityRef = cityRef;
   }
 
+  allStorage() {
+
+    const values = [];
+    const  keys = Object.keys(localStorage);
+    let i = localStorage.length;
+
+    while (i--) {
+      values.push(localStorage.getItem(keys[i]));
+    }
+
+    return values;
+  }
+
 }
 
 interface NpItem {
   Ref: string;
   Description: string;
+}
+
+interface Message {
+  products: any;
+  form: FormGroup;
 }
