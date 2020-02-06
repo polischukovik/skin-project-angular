@@ -57,6 +57,7 @@ export class OrderComponent implements OnInit {
     this.orderResult.message = backendResponse.message;
     this.orderResult.ready = true;
     localStorage.clear();
+    this.form.reset();
   }
 
   onCitySelected(cityRef: string) {
