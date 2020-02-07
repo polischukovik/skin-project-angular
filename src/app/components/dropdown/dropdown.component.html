@@ -1,17 +1,24 @@
 <div class="dropdown">
-  <div (clickOutside)="showDropdown=false" class="input-group">
+  <div (clickOutside)="showDropdown = false" class="input-group">
     <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-default"> {{ inputName }}</span>
+      <span class="input-group-text"> {{ inputName }}</span>
     </div>
 
-    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
-      [ngModel]="itemInput" (ngModelChange)="get($event);showDropdown=true" placeholder="select form dropdown">
-
+    <input
+      type="text"
+      class="form-control"
+      [ngModel]="selectedItemValue"
+      (ngModelChange)="getListItems($event)"
+      placeholder="почніть вводити..."/>
   </div>
 
   <ul class="list-group" *ngIf="showDropdown && items.length > 0">
-    <li ui-scroll="item in datasource"><a (click)="itemInput = item.Description;onClick(getId(item))" *ngFor="let item of items"
-        class="list-group-item list-group-item-action">{{ getValue(item) }}</a>
+    <li ui-scroll="item in datasource">
+      <a
+        (click)="onClick(item)"
+        *ngFor="let item of items"
+        class="list-group-item list-group-item-action"
+        >{{ getValue(item) }}</a>
     </li>
   </ul>
 </div>

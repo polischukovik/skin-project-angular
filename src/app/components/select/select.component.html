@@ -3,7 +3,8 @@
     <span class="input-group-text" id="inputGroup-sizing-default"> {{ inputName }}</span>
   </div>
 
-  <select class="form-control" [ngModel]="itemInput" placeholder="select form dropdown">
-    <option *ngFor="let item of items" value="{{ getValue(item) }}">{{ getValue(item) }}</option>
+  <select class="form-control" (change)="onSelect($event.target.value)">
+    <option hidden disabled selected value>оберіть відділення</option>
+    <option *ngFor="let item of items" [value]="item | json">{{ getValue(item) }}</option>
   </select>
 </div>

@@ -1,4 +1,4 @@
-export class Model{
+export class Model {
     modelName: string;
     calledMethod: string;
     methodProperties: object;

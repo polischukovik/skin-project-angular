@@ -5,11 +5,10 @@ import { ProductsComponent } from './products/products.component';
 import { OrderComponent } from './order/order.component'
 
 const routes: Routes = [
-  { path: '', component: ProductsComponent },
+  { path: '',  component: ProductsComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'order', component: OrderComponent },
-  { path: '**', redirectTo: '' }
+  { path: 'order', component: OrderComponent }
 ];
 
 @NgModule({

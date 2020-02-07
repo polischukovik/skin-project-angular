@@ -1,49 +1,51 @@
 <div class="container main-block">
-  <h3>Order</h3>
+  <div class="container col-8">
+    <h3>Order</h3>
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-    <div class="input-group">
-      <div class="input-group-prepend" for="fullName">
-        <span class="input-group-text">ПІБ</span>
-      </div>
-      <input type="text" class="form-control" id="fullName"
-        placeholder="Прізвище Ім'я По батькові" formControlName="fullName">
-    </div>
-
-    <div [hidden]="form.controls.fullName.valid || !form.controls.fullName.touched" class="alert alert-danger">Введіть ПІБ</div>
-
-    <br>
-
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Телефон</span>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend" for="fullName">
+          <span class="input-group-text">ПІБ</span>
+        </div>
+        <input type="text" class="form-control"
+          placeholder="Прізвище Ім'я По батькові" formControlName="fullName">
       </div>
 
-      <input type="text" class="form-control" formControlName="phone"/>
-    </div>
+      <div [hidden]="form.controls.fullName.valid || !form.controls.fullName.touched" class="alert alert-danger">Введіть ПІБ</div>
 
-    <div [hidden]="form.controls.phone.valid || !form.controls.phone.touched" class="alert alert-danger">Введіть коректний номер</div>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Телефон</span>
+        </div>
 
-    <br>
+        <input type="text" class="form-control" placeholder="(0__) ___-__-__" formControlName="phone"/>
+      </div>
 
-    <app-dropdown input-name="Місто" [getId]="getId" [getValue]="getValue" [getService]="getCities"
-      (selected)="onCitySelected($event)" formControlName="city">
-    </app-dropdown>
-    <br>
-    <app-select input-name="Відділення" [getId]="getId" [getValue]="getValue" [value]="selectedCityRef"
-      [getService]="getOutlets" formControlName="outlet">
-    </app-select>
-    <br>
+      <div [hidden]="form.controls.phone.valid || !form.controls.phone.touched" class="alert alert-danger">Введіть коректний номер</div>
 
-    <div class="mat-app-background basic-container" *ngIf="!orderResult.valid">
-      <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Підтвердити</button>
-    </div>
-    <div>
-      <h3 [hidden]="!orderResult.ready" class="alert alert-success">{{orderResult.message}}</h3>
-    </div>
+      <div class="mb-2">
+        <app-dropdown input-name="Місто" [getValue]="getValue" [getService]="getCities"
+          (selected)="onCitySelected($event)" formControlName="city">
+        </app-dropdown>
+      </div>
 
-    <div>
-      <h3 [hidden]="!formHasErrors" class="alert alert-danger">Замовлення містить помилки</h3>
-    </div>
-  </form>
+      <div class="mb-2">
+        <app-select input-name="Відділення" [getValue]="getValue" [getService]="getOutlets"
+          [forRoot]="getId(selectedCity)" formControlName="outlet">
+        </app-select>
+      </div>
+
+      <div class="mat-app-background basic-container" *ngIf="!orderResult.valid">
+        <!-- <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Підтвердити</button> -->
+        <button type="submit" class="btn btn-primary">Підтвердити</button>
+      </div>
+      <div>
+        <h3 [hidden]="!orderResult.ready" class="alert alert-success">{{orderResult.message}}</h3>
+      </div>
+
+      <div>
+        <h3 [hidden]="!formHasErrors" class="alert alert-danger">Замовлення містить помилки</h3>
+      </div>
+    </form>
+  </div>
 </div>

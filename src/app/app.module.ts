@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +13,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from './directives/clickOutside.directive';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { SelectComponent } from './components/select/select.component';
-import { Ng2TelInputModule } from 'ng2-tel-input';
 
 @NgModule({
   declarations: [
@@ -31,10 +30,10 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
-    Ng2TelInputModule
+    ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

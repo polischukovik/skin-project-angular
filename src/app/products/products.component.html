@@ -1,23 +1,23 @@
-<div class="container main-block">
+<div class="container p-1 main-block">
   <div class="row justify-content-center">
-    <div class="card col-3 shadowed" *ngFor="let product of products">
+    <div class="card col-3 m-2 shadowed" *ngFor="let product of products; let i = index">
       <img class="card-img-top" src="./assets/images/{{product.image}}" alt="Card image cap" style="margin-top: 1rem;">
       <div class="card-body">
-        <h5 class="card-title">{{product.name}}</h5>
-        <p class="card-text"><strong>Price: </strong>{{product.price}} ₴</p>
-        <p class="card-text"><strong>Size: </strong>{{product.size}}</p>
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text"><strong>Price: </strong>{{ product.price }} ₴</p>
+        <p class="card-text"><strong>Size: </strong>{{ product.size }}</p>
         <div class="container">
           <div class="row justify-content-center">
-            <a [routerLink]="['/cart', { id:product.id }]" class="col-6 btn btn-secondary" style="width: max-content"
-              onclick="">До Кошику</a>
+            <button type="button" class="col-6 btn btn-outline-info" style="width: max-content"
+              (click)="toCart(product)">+ Кошик</button>
           </div>
         </div>
       </div>
-    </div>
+  </div>
   </div>
 
   <div class="row justify-content-center margin-top">
     <br>
-    <button type="button" class="btn btn-success" [routerLink]="['/cart']">Кошик</button>
+    <button type="button" class="btn btn-info btn-lg" routerLink='/cart'>Кошик</button>
   </div>
 </div>

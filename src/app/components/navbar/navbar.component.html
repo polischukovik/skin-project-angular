@@ -1,24 +1,24 @@
 <nav class="navbar navbar-light navbar-expand container">
 
-  <a class="navbar-brand" href="#">
-      <i class="fas fa-feather-alt"></i> Softy Skin
+  <a class="navbar-brand" routerLink='/'>
+    <i class="fas fa-feather-alt"></i> Softy Skin
   </a>
 
   <div class="navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/products']">Головна </a>
+      <li class="nav-item">
+        <a class="nav-link" routerLink='/products'
+           [ngClass]="{ 'active': currentUrl =='/products' || currentUrl =='/' }"><i class="fas fa-home"></i></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/cart']"><i class="fas fa-shopping-cart"></i> Корзина</a>
+        <a class="nav-link" routerLink='/cart'
+           [ngClass]="{ 'active': currentUrl =='/cart' }"><i class="fas fa-shopping-cart"></i> Кошик</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/order']"><i class="fas fa-truck"></i> Замовлення</a>
-        </li>
+        <a class="nav-link" routerLink='/order'
+           [ngClass]="{ 'active': currentUrl =='/order' }"><i class="fas fa-truck"></i> Замовлення</a>
+      </li>
     </ul>
   </div>
-
-  <div>
-
-  </div>
+  <div class="float-right"><i class="fas fa-phone-alt"></i> (097) 589-69-85</div><br>
 </nav>

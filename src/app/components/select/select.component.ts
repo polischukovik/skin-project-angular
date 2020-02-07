@@ -6,11 +6,6 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
-  styles: [`
-    .input-group-text {
-      width: 5rem;
-    }
-  `],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -21,15 +16,15 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
 })
 export class SelectComponent implements OnInit, ControlValueAccessor {
 
+  public items = [];
+  public selectedItemValue: string;
+
   // tslint:disable-next-line:no-input-rename
   @Input('input-name') inputName: string;
   @Input() getService: (param: string) => Observable<[]>;
-  @Input() getValue: () => string;
-  @Input() getId: () => string;
+  @Input() getValue: (item: any) => string;
   onChange: any = () => {};
-  onTouched: any = () => {};
-
-  private items = [];
+  private propagateChange = (_: any) => {};
 
   constructor() { }
 
@@ -37,26 +32,26 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   }
 
   @Input()
-  public set value(val: string) {
-    if (val) {
-      this.get(val);
+  public set forRoot(rootVal: string) {
+    if (rootVal) {
+      this.getService(rootVal).subscribe( data =>  this.items = data );
     }
   }
 
-  get(param) {
-    this.getService(param).subscribe( (data) =>  this.items = data );
+  onSelect(item: any) {
+    this.propagateChange(JSON.parse(item));
   }
 
-  writeValue(obj: any): void {
+  writeValue(item: any): void {
+    if (item !== undefined) {
+      this.selectedItemValue = this.getValue(item);
+    }
   }
 
   registerOnChange(fn) {
-    this.onChange = fn;
+    this.propagateChange = fn;
   }
 
-  registerOnTouched(fn) {
-    this.onTouched = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void {
-  }
+  registerOnTouched(fn) {}
+
 }
