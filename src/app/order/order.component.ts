@@ -1,7 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { NovaPoshtaService } from './novaPoshta.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CartService } from '../cart/cart.service';
+import 'bootstrap';
+import * as $ from 'jquery';
 
 // import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
@@ -9,7 +11,8 @@ import { CartService } from '../cart/cart.service';
   selector: 'app-order',
   templateUrl: './order.component.html'
 })
-export class OrderComponent implements OnInit {
+export class OrderComponent implements OnInit, AfterViewChecked {
+
   constructor(private npService: NovaPoshtaService, private cartService: CartService) {}
 
   form: FormGroup;
@@ -30,6 +33,11 @@ export class OrderComponent implements OnInit {
       city: new FormControl('', Validators.required),
       outlet: new FormControl('', Validators.required)
     });
+    this.form.statusChanges.subscribe( event => this.onStatusChange() );
+  }
+
+  ngAfterViewChecked(): void {
+    $('[data-toggle="popover"]').popover();
   }
 
   onCitySelected(city: NpItem) {
@@ -63,6 +71,12 @@ export class OrderComponent implements OnInit {
     this.orderResult.ready = true;
     localStorage.clear();
     this.form.reset();
+  }
+
+  onStatusChange() {
+    if ( !(this.form.controls.fullName.valid || this.form.controls.fullName.touched) ) {
+      $('[data-toggle="popover"]').popover('show');
+    }
   }
 
 }

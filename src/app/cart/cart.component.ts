@@ -9,8 +9,8 @@ import { CartService } from './cart.service';
   templateUrl: './cart.component.html'
 })
 export class CartComponent implements OnInit {
-  private items: Item[] = [];
-  private total = 0;
+  public items: Item[] = [];
+  public total = 0;
   private instance = this;
 
   constructor(
