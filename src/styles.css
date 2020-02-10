@@ -32,3 +32,14 @@ nav {
 .ng-touched.ng-invalid {
   border: 1px solid red;
 }
+
+.popover {
+  background: #f8d7da;
+}
+
+.popover > .arrow:before {
+  border-top-color: #f8d7da;
+}
+.popover > .arrow:after {
+  border-top-color: #f8d7da;
+}

@@ -37,7 +37,10 @@ export class OrderComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    $('[data-toggle="popover"]').popover();
+    $('[data-toggle="popover"]').popover({
+      trigger: 'manual',
+      placement: 'top'
+    });
   }
 
   onCitySelected(city: NpItem) {
@@ -74,8 +77,23 @@ export class OrderComponent implements OnInit, AfterViewChecked {
   }
 
   onStatusChange() {
-    if ( !(this.form.controls.fullName.valid || this.form.controls.fullName.touched) ) {
-      $('[data-toggle="popover"]').popover('show');
+    this.challangeControl('fullName');
+    this.challangeControl('phone');
+    this.challangeControl('city');
+    this.challangeControl('outlet');
+  }
+
+  challangeControl(name: string) {
+    const el = $(`[formControlName="${name}"]`);
+
+    console.log('For control: ' + name)
+    console.log(' valid=' + this.form.controls[name].valid + ' => ' + !this.form.controls[name].valid)
+    console.log(' touched=' + this.form.controls[name].touched)
+    if ( !this.form.controls[name].valid && this.form.controls[name].touched ) {
+      el.popover('show');
+      console.log(' show')
+    } else {
+      el.popover('hide');
     }
   }
 

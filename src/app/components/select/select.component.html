@@ -3,7 +3,7 @@
     <span class="input-group-text" id="inputGroup-sizing-default"> {{ inputName }}</span>
   </div>
 
-  <select class="form-control" (change)="onSelect($event.target.value)">
+  <select class="form-control" (change)="onSelect($event.target.value)" rel="popover">
     <option hidden disabled selected value>оберіть відділення</option>
     <option *ngFor="let item of items" [value]="item | json">{{ getValue(item) }}</option>
   </select>

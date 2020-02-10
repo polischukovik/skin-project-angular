@@ -8,6 +8,8 @@
           <span class="input-group-text">ПІБ</span>
         </div>
         <input
+          data-toggle="popover"
+          data-content="ПІБ не може бути порожнім"
           type="text"
           class="form-control"
           placeholder="Прізвище Ім'я По батькові"
@@ -15,14 +17,7 @@
         />
       </div>
 
-      <div
-        [hidden]="
-          form.controls.fullName.valid || !form.controls.fullName.touched
-        "
-        class="alert alert-danger"
-      >
-        ПІБ не може бути порожнім
-      </div>
+
 
       <div class="input-group mb-2">
         <div class="input-group-prepend">
@@ -30,6 +25,8 @@
         </div>
 
         <input
+          data-toggle="popover"
+          data-content="Номер повинен бути у форматі (XXX) XXX-XX-XX"
           type="text"
           class="form-control"
           placeholder="(0__) ___-__-__"
@@ -37,15 +34,10 @@
         />
       </div>
 
-      <div
-        [hidden]="form.controls.phone.valid || !form.controls.phone.touched"
-        class="alert alert-danger"
-      >
-        Номер повинен бути у форматі (XXX) XXX-XX-XX
-      </div>
-
       <div class="mb-2">
         <app-dropdown
+          data-toggle="popover"
+          data-content="Почніть вводити назву міста та оберіть зі списку"
           input-name="Місто"
           [getValue]="getValue"
           [getService]="getCities"
@@ -55,15 +47,11 @@
         </app-dropdown>
       </div>
 
-      <div
-        [hidden]="form.controls.city.valid || !form.controls.city.touched"
-        class="alert alert-danger"
-      >
-        Почніть вводити назву міста та оберіть зі списку
-      </div>
-
       <div class="mb-2">
         <app-select
+          data-toggle="popover"
+          data-content="Оберіть віддеління зі списку"
+          data-selector="[rel=popover]"
           input-name="Відділення"
           [getValue]="getValue"
           [getService]="getOutlets"
@@ -73,17 +61,7 @@
         </app-select>
       </div>
 
-      <div
-        [hidden]="form.controls.outlet.valid || !form.controls.outlet.touched"
-        class="alert alert-danger"
-      >
-        Оберіть відділення
-      </div>
-
-      <div
-        class="mat-app-background basic-container"
-        *ngIf="!orderResult.valid"
-      >
+      <div class="mat-app-background basic-container" *ngIf="!orderResult.valid">
         <button type="submit" [disabled]="!form.valid" class="btn btn-primary">
           Підтвердити
         </button>
@@ -101,16 +79,16 @@
       </div>
     </form>
 
-    <button
+    <!-- <button
       type="button"
       class="btn btn-lg btn-danger"
       data-placement="top"
-      data-toggle="popover"
+      data-toggle="popover-fullname"
       data-trigger="focus"
       data-content="p1"
       >
       Click to toggle popover
-    </button>
+    </button> -->
   </div>
 
   <ng-template #p1>
