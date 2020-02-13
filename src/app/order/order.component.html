@@ -2,6 +2,12 @@
   <div class="container col-8">
     <h3>Order</h3>
 
+    <div>
+      Замовлення буде відправлене Новою Поштою на вибране відділення.
+      Оплата накладним платежем.
+    </div>
+    <br>
+
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
       <div class="input-group mb-2">
         <div class="input-group-prepend" for="fullName">

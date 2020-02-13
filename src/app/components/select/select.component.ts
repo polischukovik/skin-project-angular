@@ -40,7 +40,10 @@ export class SelectComponent implements OnInit, ControlValueAccessor, Validator 
     this.selectedItem = undefined;
   }
 
-  writeValue(value) { }
+  writeValue(value) {
+    this.selectedItem = undefined;
+    this.currentValue = value;
+  }
   registerOnChange(fn) { this.onChange = fn; }
   registerOnTouched(fn) { this.onTouched = fn; }
 

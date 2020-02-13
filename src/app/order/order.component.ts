@@ -45,18 +45,24 @@ export class OrderComponent implements OnInit, AfterViewChecked {
   }
 
   onSubmit() {
+    this.orderErrors = [];
+
+    this.challangeControlValid('fullName');
+    this.challangeControlValid('phone');
+    this.challangeControlValid('city');
+    this.challangeControlValid('outlet');
+
     if (!this.form.valid) {
       this.orderErrors.push('Замовлення містить помилки');
-      this.challangeControlValid('fullName');
-      this.challangeControlValid('phone');
-      this.challangeControlValid('city');
-      this.challangeControlValid('outlet');
     }
 
     if (this.cartService.empty) {
       this.orderErrors.push('Кошик порожній');
     }
-    this.confirm();
+
+    if (this.form.valid && !this.cartService.empty) {
+      this.confirm();
+    }
   }
 
   confirm() {
@@ -83,6 +89,8 @@ export class OrderComponent implements OnInit, AfterViewChecked {
   onStatusChange() {
     this.challangeControlValidPristine('fullName');
     this.challangeControlValidPristine('phone');
+    this.challangeControlValidPristine('city');
+    this.challangeControlValidPristine('outlet');
   }
 
   challangeControlValidPristine(name: string) {

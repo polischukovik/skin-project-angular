@@ -16,7 +16,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink='/order'
-           [ngClass]="{ 'active': currentUrl =='/order' }"><i class="fas fa-truck"></i> Замовлення</a>
+           [ngClass]="{'disabled': cartService.empty, 'active': currentUrl =='/order' }"><i class="fas fa-truck"></i> Замовлення</a>
       </li>
     </ul>
   </div>

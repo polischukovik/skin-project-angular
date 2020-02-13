@@ -42,7 +42,10 @@ export class DropdownComponent implements OnInit, ControlValueAccessor, Validato
   ngOnInit() {
   }
 
-  writeValue(value) { }
+  writeValue(value) {
+    this.selectedItem = undefined;
+    this.inputValue = '';
+  }
   registerOnChange(fn) { this.onChange = fn; }
   registerOnTouched(fn) { this.onTouched = fn; }
 
