@@ -1,24 +1,21 @@
 <div class="dropdown">
-  <div (clickOutside)="showDropdown = false" class="input-group">
+  <div class="input-group">
     <div class="input-group-prepend">
-      <span class="input-group-text"> {{ inputName }}</span>
+      <span class="input-group-text width-7"> {{ inputName }}</span>
     </div>
 
     <input
       type="text"
       class="form-control"
-      [ngModel]="selectedItemValue"
-      (ngModelChange)="getListItems($event)"
+      [(ngModel)]="inputValue"
+      (keyup)="getListItems()"
       placeholder="почніть вводити..."/>
   </div>
 
-  <ul class="list-group" *ngIf="showDropdown && items.length > 0">
+  <ul (clickOutside)="clickedOutside()" class="list-group" *ngIf="showDropdown">
     <li ui-scroll="item in datasource">
-      <a
-        (click)="onClick(item)"
-        *ngFor="let item of items"
-        class="list-group-item list-group-item-action"
-        >{{ getValue(item) }}</a>
+      <a *ngIf="items.length == 0" class="list-group-item list-group-item-action text-muted">--значень не знайдено--</a>
+      <a (click)="onClick(item)" *ngFor="let item of items" class="list-group-item list-group-item-action">{{ getValue(item) }}</a>
     </li>
   </ul>
 </div>

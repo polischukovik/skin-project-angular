@@ -49,7 +49,9 @@ export class CartService {
 
   getTotal(): number {
     let total = 0;
-    for (const item of JSON.parse(localStorage.getItem('cart'))) {
+    const storageItems = JSON.parse(localStorage.getItem('cart'));
+    if (!this.isIterable(storageItems)) { return 0; }
+    for (const item of storageItems) {
       total += item.product.price * item.quantity;
     }
     return total;
@@ -57,7 +59,9 @@ export class CartService {
 
   getAllCartItems() {
     const items = [];
-    for (const item of JSON.parse(localStorage.getItem('cart'))) {
+    const storageItems = JSON.parse(localStorage.getItem('cart'));
+    if (!this.isIterable(storageItems)) { return []; }
+    for (const item of storageItems) {
       items.push({
         product: item.product,
         quantity: item.quantity
@@ -65,6 +69,16 @@ export class CartService {
     }
 
     return items;
+  }
+
+  get empty() {
+    const storageItems = JSON.parse(localStorage.getItem('cart'));
+    if (!this.isIterable(storageItems)) { return true; }
+    return storageItems.length === 0;
+  }
+
+  private isIterable(obj) {
+    return obj != null && typeof obj[Symbol.iterator] === 'function';
   }
 
 }

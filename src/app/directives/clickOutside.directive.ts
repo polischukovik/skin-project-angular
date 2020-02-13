@@ -16,5 +16,6 @@ export class ClickOutsideDirective {
     if (!clickedInside) {
       this.clickOutside.emit(null);
     }
+
   }
 }

@@ -1,10 +1,75 @@
 <div class="input-group">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="inputGroup-sizing-default"> {{ inputName }}</span>
+    <span class="input-group-text width-7" id="inputGroup-sizing-default"> {{ inputName }}</span>
   </div>
 
-  <select class="form-control" (change)="onSelect($event.target.value)" rel="popover">
-    <option hidden disabled selected value>оберіть відділення</option>
+  <select class="form-control" [(ngModel)]="currentValue" (change)="onSelect($event.target.value)" rel="popover">
+    <option hidden disabled selected value="none">оберіть відділення</option>
     <option *ngFor="let item of items" [value]="item | json">{{ getValue(item) }}</option>
   </select>
+
+  <div class="input-group-append">
+    <span class="input-group-text like-btn" (click)="showInfo()" [ngClass]="{'disabled': selectedItem === undefined}">
+      <i class="fas fa-info"></i>
+    </span>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="card mb-3 shadowed modal-content modal-body" style="background-color:white ;max-width: 540px;">
+      <div class="row no-gutters ml-1 mt-1">
+        <div class="col-md-4">
+
+          <table class="table table-sm table-borderless" style="background-color:white ;">
+            <tbody>
+              <tr>
+                <th scope="col" colspan="2">Графік роботи</th>
+              </tr>
+              <tr>
+                <th scope="row"><p class="mb-0"><small>Пн:</small></p></th>
+                <td><p class="mb-0"><small>{{ selectedItem?.Schedule.Monday }}</small></p></td>
+              </tr>
+              <tr>
+                <th scope="row"><p class="mb-0"><small>Вт:</small></p></th>
+                <td><p class="mb-0"><small>{{ selectedItem?.Schedule.Tuesday }}</small></p></td>
+              </tr>
+              <tr>
+                <th scope="row"><p class="mb-0"><small>Ср:</small></p></th>
+                <td><p class="mb-0"><small>{{ selectedItem?.Schedule.Wednesday }}</small></p></td>
+              </tr>
+              <tr>
+                <th scope="row"><p class="mb-0"><small>Чт:</small></p></th>
+                <td><p class="mb-0"><small>{{ selectedItem?.Schedule.Thursday }}</small></p></td>
+              </tr>
+              <tr>
+                <th scope="row"><p class="mb-0"><small>Пт:</small></p></th>
+                <td><p class="mb-0"><small>{{ selectedItem?.Schedule.Friday }}</small></p></td>
+              </tr>
+              <tr>
+                <th scope="row"><p class="mb-0"><small>Сб:</small></p></th>
+                <td><p class="mb-0"><small>{{ selectedItem?.Schedule.Saturday }}</small></p></td>
+              </tr>
+              <tr>
+                <th scope="row"><p class="mb-0"><small>Нд:</small></p></th>
+                <td><p class="mb-0"><small>{{ selectedItem?.Schedule.Sunday }}</small></p></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">Відділення № {{ selectedItem?.Number }}<br>{{ selectedItem?.ShortAddress }}</h5>
+            <p class="card-text">
+              {{ selectedItem?.SettlementDescription }}, {{ selectedItem?.SettlementRegionsDescription }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

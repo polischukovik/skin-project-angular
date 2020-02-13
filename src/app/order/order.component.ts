@@ -4,8 +4,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CartService } from '../cart/cart.service';
 import 'bootstrap';
 import * as $ from 'jquery';
-
-// import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-order',
@@ -18,7 +18,7 @@ export class OrderComponent implements OnInit, AfterViewChecked {
   form: FormGroup;
 
   private orderResult = { ready: false, message: '' };
-  public formHasErrors = false;
+  public orderErrors = [];
 
   public selectedCity: NpItem = { Ref: '', Description: ''};
   public getCities = param => this.npService.getCities(param);
@@ -30,17 +30,14 @@ export class OrderComponent implements OnInit, AfterViewChecked {
     this.form = new FormGroup({
       fullName: new FormControl('', Validators.required),
       phone: new FormControl('', Validators.required),
-      city: new FormControl('', Validators.required),
-      outlet: new FormControl('', Validators.required)
+      city: new FormControl(''),
+      outlet: new FormControl('')
     });
     this.form.statusChanges.subscribe( event => this.onStatusChange() );
   }
 
   ngAfterViewChecked(): void {
-    $('[data-toggle="popover"]').popover({
-      trigger: 'manual',
-      placement: 'top'
-    });
+    $('[data-toggle="popover"]').popover({ trigger: 'manual', placement: 'top' });
   }
 
   onCitySelected(city: NpItem) {
@@ -48,11 +45,18 @@ export class OrderComponent implements OnInit, AfterViewChecked {
   }
 
   onSubmit() {
-    if (!this.form.hasError) {
-      this.confirm();
-    } else {
-      this.formHasErrors = true;
+    if (!this.form.valid) {
+      this.orderErrors.push('Замовлення містить помилки');
+      this.challangeControlValid('fullName');
+      this.challangeControlValid('phone');
+      this.challangeControlValid('city');
+      this.challangeControlValid('outlet');
     }
+
+    if (this.cartService.empty) {
+      this.orderErrors.push('Кошик порожній');
+    }
+    this.confirm();
   }
 
   confirm() {
@@ -77,23 +81,26 @@ export class OrderComponent implements OnInit, AfterViewChecked {
   }
 
   onStatusChange() {
-    this.challangeControl('fullName');
-    this.challangeControl('phone');
-    this.challangeControl('city');
-    this.challangeControl('outlet');
+    this.challangeControlValidPristine('fullName');
+    this.challangeControlValidPristine('phone');
   }
 
-  challangeControl(name: string) {
+  challangeControlValidPristine(name: string) {
     const el = $(`[formControlName="${name}"]`);
 
-    console.log('For control: ' + name)
-    console.log(' valid=' + this.form.controls[name].valid + ' => ' + !this.form.controls[name].valid)
-    console.log(' touched=' + this.form.controls[name].touched)
-    if ( !this.form.controls[name].valid && this.form.controls[name].touched ) {
-      el.popover('show');
-      console.log(' show')
-    } else {
+    if ( this.form.controls[name].valid || this.form.controls[name].pristine ) {
       el.popover('hide');
+    } else {
+      el.popover('show');
+    }
+  }
+
+  challangeControlValid(name: string) {
+    const el = $(`[formControlName="${name}"]`);
+    if ( this.form.controls[name].valid ) {
+      el.popover('hide');
+    } else {
+      el.popover('show');
     }
   }
 

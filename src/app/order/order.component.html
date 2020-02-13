@@ -5,7 +5,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
       <div class="input-group mb-2">
         <div class="input-group-prepend" for="fullName">
-          <span class="input-group-text">ПІБ</span>
+          <span class="input-group-text width-7">ПІБ</span>
         </div>
         <input
           data-toggle="popover"
@@ -21,7 +21,7 @@
 
       <div class="input-group mb-2">
         <div class="input-group-prepend">
-          <span class="input-group-text">Телефон</span>
+          <span class="input-group-text width-7">Телефон</span>
         </div>
 
         <input
@@ -42,13 +42,14 @@
           [getValue]="getValue"
           [getService]="getCities"
           (selected)="onCitySelected($event)"
+          (cleared)="selectComp.clear()"
           formControlName="city"
         >
         </app-dropdown>
       </div>
 
       <div class="mb-2">
-        <app-select
+        <app-select #selectComp
           data-toggle="popover"
           data-content="Оберіть віддеління зі списку"
           data-selector="[rel=popover]"
@@ -61,37 +62,24 @@
         </app-select>
       </div>
 
-      <div class="mat-app-background basic-container" *ngIf="!orderResult.valid">
-        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">
+      <div class="mat-app-background basic-container">
+        <button type="submit" class="btn btn-primary">
           Підтвердити
         </button>
       </div>
+
+
       <div>
         <h3 [hidden]="!orderResult.ready" class="alert alert-success">
           {{ orderResult.message }}
         </h3>
       </div>
 
-      <div>
-        <h3 [hidden]="!formHasErrors" class="alert alert-danger">
-          Замовлення містить помилки
-        </h3>
+      <div class="mt-2" *ngFor="let error of orderErrors">
+        <h5 class="alert alert-danger">
+          {{ error }}
+        </h5>
       </div>
     </form>
-
-    <!-- <button
-      type="button"
-      class="btn btn-lg btn-danger"
-      data-placement="top"
-      data-toggle="popover-fullname"
-      data-trigger="focus"
-      data-content="p1"
-      >
-      Click to toggle popover
-    </button> -->
   </div>
-
-  <ng-template #p1>
-    <strong>Popover</strong>
-  </ng-template>
 </div>

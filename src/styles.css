@@ -12,8 +12,8 @@ nav {
 }
 
 .main-block  {
-  background: rgb(246,255,254);
-  background: linear-gradient(0deg, rgba(246,255,254,0) 0%, rgba(246,255,254,1) 100%);
+  background: rgb(216,255,251);
+  background: linear-gradient(0deg, rgba(216,255,251,0) 0%, rgba(230,250,255,1) 78%);
   height: 80vh;
 }
 
@@ -25,7 +25,7 @@ nav {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.input-group-text {
+.input-group-text.width-7{
   width: 7rem;
 }
 
@@ -42,4 +42,27 @@ nav {
 }
 .popover > .arrow:after {
   border-top-color: #f8d7da;
+}
+
+.btn-circle.btn-sm {
+  width: 20px;
+  height: 20px;
+  padding: 1px 0px;
+  border-radius: 11px;
+  font-size: 11px;
+  text-align: center;
+}
+
+.like-btn {
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+.like-btn.disabled {
+  cursor: default;
+  color: rgb(209, 209, 209) !important;
+}
+
+.like-btn:hover {
+  color: #08bdeb;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, forwardRef } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, Validator } from '@angular/forms';
 
 @Component({
   selector: 'app-dropdown',
@@ -11,67 +11,64 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl } f
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => DropdownComponent),
       multi: true
-    },
+    }
+    ,
     {
       provide: NG_VALIDATORS,
-      useValue: dropdownValidator,
+      useExisting: forwardRef(() => DropdownComponent),
       multi: true
     }
   ]
 })
-export class DropdownComponent implements OnInit, ControlValueAccessor {
+export class DropdownComponent implements OnInit, ControlValueAccessor, Validator {
 
   public items = [];
-  public selectedItemValue: string;
+  public inputValue = '';
+  public selectedItem: any;
   public showDropdown = false;
 
   // tslint:disable-next-line:no-input-rename
   @Input('input-name') inputName: string;
   @Input() getService: (param: any) => Observable<[]>;
   @Output() selected = new EventEmitter<any>();
+  @Output() cleared = new EventEmitter<any>();
   @Input() getValue: (item: any) => string;
-  private propagateChange = (_: any) => {};
+
+  onChange;
+  onTouched;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  getListItems(currentInput: string) {
-    this.getService(currentInput).subscribe( data => this.items = data);
+  writeValue(value) { }
+  registerOnChange(fn) { this.onChange = fn; }
+  registerOnTouched(fn) { this.onTouched = fn; }
+
+  validate(control: FormControl) {
+      return this.selectedItem === undefined ? { valid: false } : null;
+  }
+
+  getListItems() {
+    if (this.inputValue.length < 2 ) { return; }
+    this.getService(this.inputValue).subscribe( data => this.items = data);
     this.showDropdown = true;
   }
 
   onClick(item: any) {
-    this.selectedItemValue = this.getValue(item);
+    this.showDropdown = false;
+    this.selectedItem = item;
+    this.inputValue = this.getValue(item);
     this.selected.emit(item);
-    this.propagateChange(item);
+    this.onChange(item);
+    this.onTouched();
+    this.cleared.emit();
   }
 
-  setDisabledState?(isDisabled: boolean): void {
+  clickedOutside() {
+    this.showDropdown = false;
+    this.inputValue = this.selectedItem === undefined ? '' : this.getValue(this.selectedItem);
   }
 
-  writeValue(item: any): void {
-    if (item !== undefined) {
-      this.selectedItemValue = this.getValue(item);
-    }
-  }
-
-  registerOnChange(fn) {
-    this.propagateChange = fn;
-  }
-
-  registerOnTouched(fn) {}
-}
-
-export function dropdownValidator(c: FormControl) {
-  const err = {
-    rangeError: {
-      given: c.value,
-      max: 10,
-      min: 0
-    }
-  };
-
-  return (c.value > 10 || c.value < 0) ? err : null;
 }

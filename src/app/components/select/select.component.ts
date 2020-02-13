@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { DropdownComponent } from '../dropdown/dropdown.component';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS, Validator, FormControl } from '@angular/forms';
+import * as $ from 'jquery';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-select',
@@ -11,24 +12,40 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => SelectComponent),
       multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: SelectComponent,
+      multi: true
     }
   ]
 })
-export class SelectComponent implements OnInit, ControlValueAccessor {
+export class SelectComponent implements OnInit, ControlValueAccessor, Validator {
 
   public items = [];
-  public selectedItemValue: string;
+  public selectedItem: any;
+  public currentValue: any;
+
+  onChange;
+  onTouched;
 
   // tslint:disable-next-line:no-input-rename
   @Input('input-name') inputName: string;
   @Input() getService: (param: string) => Observable<[]>;
   @Input() getValue: (item: any) => string;
-  onChange: any = () => {};
-  private propagateChange = (_: any) => {};
 
   constructor() { }
 
   ngOnInit() {
+    this.selectedItem = undefined;
+  }
+
+  writeValue(value) { }
+  registerOnChange(fn) { this.onChange = fn; }
+  registerOnTouched(fn) { this.onTouched = fn; }
+
+  validate(control: FormControl) {
+    return this.selectedItem === undefined ? { valid: false } : null;
   }
 
   @Input()
@@ -39,19 +56,19 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   }
 
   onSelect(item: any) {
-    this.propagateChange(JSON.parse(item));
+    this.selectedItem = JSON.parse(item);
+    this.onChange(this.selectedItem);
+    this.onTouched();
   }
 
-  writeValue(item: any): void {
-    if (item !== undefined) {
-      this.selectedItemValue = this.getValue(item);
-    }
+  public clear() {
+    this.selectedItem = undefined;
+    this.onChange(this.selectedItem);
+    this.onTouched();
   }
 
-  registerOnChange(fn) {
-    this.propagateChange = fn;
+  showInfo() {
+    $('#infoModal').modal('show');
   }
-
-  registerOnTouched(fn) {}
 
 }
