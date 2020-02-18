@@ -16,20 +16,20 @@ export class ProductService {
   }
 
   findAll(): Observable<Product[]> {
-    return this.http.get(this.jsonURL)
+    return this.http.get( '/api/v1/products' )
       .pipe(
-        map((response: Product[]) => {
-          return response;
+        map((response: any) => {
+          return response._embedded.products;
         })
       );
   }
 
-  find(id: string): Observable<Product> {
-    return this.findAll()
-      .pipe(
-        map(products => products.find(product => product.id === id))
-      );
-  }
+  // find(id: string): Observable<Product> {
+  //   return this.findAll()
+  //     .pipe(
+  //       map(products => products.find(product => product.id === id))
+  //     );
+  // }
 
   private handleError(error: HttpErrorResponse) {
     console.log(error.message);

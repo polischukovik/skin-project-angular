@@ -76,7 +76,7 @@
 
 
       <div>
-        <h3 [hidden]="!orderResult.ready" class="alert alert-success">
+        <h3 [hidden]="orderResult.message === undefined" class="alert alert-success">
           {{ orderResult.message }}
         </h3>
       </div>

@@ -1,7 +1,7 @@
 <div class="container p-1 main-block">
   <div class="row justify-content-center">
     <div class="card col-3 m-2 shadowed" *ngFor="let product of products; let i = index">
-      <img class="card-img-top" src="./assets/images/{{product.image}}" alt="Card image cap" style="margin-top: 1rem;">
+      <img class="card-img-top h225" src="./assets/images/{{ product.image }}"  onError="imageUrl" style="margin-top: 1rem;">
       <div class="card-body">
         <h5 class="card-title">{{ product.name }}</h5>
         <p class="card-text"><strong>Price: </strong>{{ product.price }} ₴</p>

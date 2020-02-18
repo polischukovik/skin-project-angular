@@ -1,5 +1,5 @@
 export class Product {
-  id: string;
+  uuid: string;
   name: string;
   description: string;
   size: string;

@@ -4,8 +4,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CartService } from '../cart/cart.service';
 import 'bootstrap';
 import * as $ from 'jquery';
-import { Observable } from 'rxjs';
-import { EventEmitter } from 'protractor';
+import { Order } from './order';
+import { OrderService } from './OrderService';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-order',
@@ -13,11 +14,14 @@ import { EventEmitter } from 'protractor';
 })
 export class OrderComponent implements OnInit, AfterViewChecked {
 
-  constructor(private npService: NovaPoshtaService, private cartService: CartService) {}
+  constructor(
+      private npService: NovaPoshtaService
+    , private cartService: CartService
+    , private orderService: OrderService) {}
 
   form: FormGroup;
 
-  private orderResult = { ready: false, message: '' };
+  public orderResult = { message: undefined };
   public orderErrors = [];
 
   public selectedCity: NpItem = { Ref: '', Description: ''};
@@ -68,20 +72,20 @@ export class OrderComponent implements OnInit, AfterViewChecked {
   confirm() {
     const products = this.cartService.getAllCartItems();
     console.log(products);
-    const message: Message = {
-      form: this.form.value,
-      products
+    const order: Order = {
+      uuid: uuid.v4(),
+      submitedDate: new Date(),
+      customerName: this.form.value.fullName,
+      phone: this.form.value.phone,
+      city: this.form.value.city.Description,
+      outlet: this.form.value.outlet.Description,
+      status: 'ENTERED',
+      products: this.cartService.getProducts()
     };
 
-    console.log(message);
+    this.orderService.createOrder(order)
+      .subscribe( response => this.orderResult.message =  `Заявка на Ваше замовлення № ${response.uuid}` );
 
-    const backendResponse = {
-      code: 'OK',
-      message: 'Заявка на Ваше замовлення № 34425'
-    };
-
-    this.orderResult.message = backendResponse.message;
-    this.orderResult.ready = true;
     localStorage.clear();
     this.form.reset();
   }
