@@ -3,8 +3,12 @@ body {
   background-color: #ffffff;
 }
 
-nav {
+.navbar-light {
   background-color: #cdf5ff;
+}
+
+.navbar-gray {
+  background-color: #e2e2e2;
 }
 
 .card {

@@ -6,7 +6,7 @@ import 'bootstrap';
 import * as $ from 'jquery';
 import { Order } from './order';
 import { OrderService } from './OrderService';
-import * as uuid from 'uuid';
+import * as uuid from 'shortid';
 
 @Component({
   selector: 'app-order',
@@ -17,7 +17,7 @@ export class OrderComponent implements OnInit, AfterViewChecked {
   constructor(
       private npService: NovaPoshtaService
     , private cartService: CartService
-    , private orderService: OrderService) {}
+    , private orderService: OrderService) { }
 
   form: FormGroup;
 
@@ -73,7 +73,7 @@ export class OrderComponent implements OnInit, AfterViewChecked {
     const products = this.cartService.getAllCartItems();
     console.log(products);
     const order: Order = {
-      uuid: uuid.v4(),
+      uuid: uuid.generate(),
       submitedDate: new Date(),
       customerName: this.form.value.fullName,
       phone: this.form.value.phone,
