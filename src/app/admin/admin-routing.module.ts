@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
+import { OrderListComponent } from './order-list/order-list.component';
 
 const routes: Routes = [
   {
@@ -12,14 +13,13 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: 'login', component: LoginComponent },
-
       {
-        path: 'list',
+        path: 'products',
         component: ProductListComponent
       },
       {
-        path: 'create',
-        component: ProductCreateComponent
+        path: 'orders',
+        component: OrderListComponent
       },
       {
         path: 'update',

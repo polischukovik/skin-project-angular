@@ -1,19 +1,27 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">uuid</th>
-      <th scope="col">Назва</th>
-      <th scope="col">Розмір</th>
-      <th scope="col">Ціна</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products">
-      <th scope="row">{{ product.uuid }}</th>
-      <td> {{ product.name }}</td>
-      <td> {{ product.size }}</td>
-      <td> {{ product.price }}</td>
-    </tr>
-
-  </tbody>
-</table>
+<div class="tab-body">
+  <div class="table-admin">
+    <div class="table-controls">
+      <a class="button"><i class=" btn-plus"></i></a>
+      <a class="button"><i class=" btn-plus"></i></a>
+      <a class="button"><i class=" btn-plus"></i></a>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">uuid</th>
+          <th scope="col">Назва</th>
+          <th scope="col">Розмір</th>
+          <th scope="col">Ціна</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.uuid }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.size }}</td>
+          <td>{{ product.price }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

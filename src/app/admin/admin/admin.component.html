@@ -1,4 +1,18 @@
-<div class="container">
+<div class="container admin-panel">
   <h4>Інтерфейс адміністратора</h4>
-  <router-outlet></router-outlet>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{ 'active': router.url==='/admin/products' }" data-toggle="tab" role="tab" routerLink="products">Продукти</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{ 'active': router.url==='/admin/orders' }" data-toggle="tab" role="tab" routerLink="orders">Замовлення</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [ngClass]="{ 'active': router.url==='/admin/gui' }" data-toggle="tab" role="tab"  routerLink="gui">Інтерфейс</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <router-outlet></router-outlet>
+  </div>
 </div>

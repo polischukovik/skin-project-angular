@@ -20,7 +20,7 @@
            [ngClass]="{'disabled': cartService.empty, 'active': currentUrl =='/order' }"><i class="fas fa-truck"></i> Замовлення</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink='/admin'> Адмін</a>
+        <a class="nav-link" routerLink='/admin/orders'> Адмін</a>
       </li>
       <li *ngIf="authService.isLoggedIn" class="nav-item">
         <a class="nav-link" (click)="authService.logout()"> Вийти</a>
