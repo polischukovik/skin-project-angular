@@ -1,9 +1,10 @@
 <div class="tab-body">
   <div class="table-admin">
     <div class="table-controls">
-      <a class="button"><i class=" btn-plus"></i></a>
-      <a class="button"><i class=" btn-plus"></i></a>
-      <a class="button"><i class=" btn-plus"></i></a>
+      <a class="button" tabindex="-1" routerLink="new"><i class="fa fa-plus"></i></a>
+      <a class="button" tabindex="-1"><i class="fa fa-minus"></i></a>
+      <a class="button" tabindex="-1"><i class="fa fa-pen"></i></a>
+      <a class="button" tabindex="-1" (click)="refresh()"><i class="fa fa-sync"></i></a>
     </div>
     <table>
       <thead>
@@ -15,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products">
+        <tr *ngFor="let product of products" (click)="selected=product" [ngClass]="{ 'selected': selected === product }">
           <td>{{ product.uuid }}</td>
           <td>{{ product.name }}</td>
           <td>{{ product.size }}</td>

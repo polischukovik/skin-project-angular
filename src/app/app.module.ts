@@ -16,6 +16,9 @@ import { ClickOutsideDirective } from './directives/clickOutside.directive';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { SelectComponent } from './components/select/select.component';
 import { AdminModule } from './admin/admin.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LyThemeModule, LY_THEME } from '@alyle/ui';
+import { MinimaLight } from '@alyle/ui/themes/minima';
 
 const firbaseConfig = {
   apiKey: 'AIzaSyDiFG-hQ8TecPQ_7r-u-Pfw1iwM1b-Nl7k',
@@ -47,9 +50,11 @@ const firbaseConfig = {
     ReactiveFormsModule,
     AdminModule,
     AngularFireModule.initializeApp(firbaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    BrowserAnimationsModule,
+    LyThemeModule.setTheme('minima-light')
   ],
-  providers: [],
+  providers: [{ provide: LY_THEME, useClass: MinimaLight, multi: true }],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

@@ -1,1 +1,59 @@
-<p>product-create works!</p>
+<div class="tab-body">
+  <div class="table-controls">
+    <a class="button" tabindex="-1" routerLink=".."
+      ><i class="fas fa-less-than"></i
+    ></a>
+    <a class="button" tabindex="-1"><i class="fa fa-save"></i></a>
+  </div>
+  <form>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="name">Назва</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Назва продукту"
+          />
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <label for="size">Розмір</label>
+              <input
+                type="text"
+                class="form-control"
+                id="size"
+                placeholder="Розмір"
+              />
+            </div>
+            <div class="col">
+              <label for="price">Ціна</label>
+              <input
+                type="text"
+                class="form-control"
+                id="price"
+                placeholder="Ціна"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Опис</label>
+      <textarea
+        class="form-control"
+        id="description"
+        rows="3"
+        placeholder="Опис продукту"
+      ></textarea>
+    </div>
+  </form>
+</div>
