@@ -24,12 +24,9 @@ export class ProductService {
       );
   }
 
-  // find(id: string): Observable<Product> {
-  //   return this.findAll()
-  //     .pipe(
-  //       map(products => products.find(product => product.id === id))
-  //     );
-  // }
+  findOne(uuid: string): Observable<Product> {
+    return this.http.get<Product>( `/api/v1/products/search/findByUuid?uuid=${uuid}` );
+  }
 
   private handleError(error: HttpErrorResponse) {
     console.log(error.message);

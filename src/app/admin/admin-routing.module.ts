@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { CropperComponent } from './cropper/cropper.component';
 
 const routes: Routes = [
   {
@@ -22,12 +23,20 @@ const routes: Routes = [
         component: ProductCreateComponent
       },
       {
+        path: 'products/edit/:uuid',
+        component: ProductUpdateComponent
+      },
+      {
         path: 'orders',
         component: OrderListComponent
       },
       {
         path: 'update',
         component: ProductUpdateComponent
+      },
+      {
+        path: 'cropper',
+        component: CropperComponent
       }
     ]
   }

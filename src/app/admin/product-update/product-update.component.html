@@ -1,1 +1,79 @@
-<p>product-update works!</p>
+<div class="tab-body">
+  <div class="table-controls">
+    <a class="button" tabindex="-1" routerLink="../.."><i class="fas fa-less-than"></i></a>
+    <a class="button" tabindex="-1"><i class="fa fa-save"></i></a>
+  </div>
+  <form *ngIf="product$ | async; else loading" [formGroup]="form">
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="name">Назва</label>
+              <input type="text" class="form-control" id="name" placeholder="Назва продукту" formControlName="name"/>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="size">Розмір</label>
+              <input type="text" class="form-control" id="size" placeholder="Розмір" formControlName="size"/>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="price">Ціна</label>
+              <input type="text" class="form-control" id="price" placeholder="Ціна" formControlName="price"/>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="description">Опис</label>
+              <textarea class="form-control" id="description" rows="3" placeholder="Опис продукту" formControlName="description" ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <div class="image-area" [hidden]="showCropper">
+            <img *ngIf="imageData" class="image-element" [src]="imageData"/>
+            <div *ngIf="!imageData" class="image-element img-placeholder"><h3>Фото відсутнє</h3></div>
+            <div class="img-button"> <a tabindex="-1" (click)="_fileInput.click()">Змінити</a> </div>
+          </div>
+
+          <div class="img-cropper" [hidden]="!showCropper">
+            <div class="img-cropper-wrapper">
+              <div [className]="classes.actions">
+                <span [className]="classes.flex"></span>
+                <!-- Hidden input -->
+                <input #_fileInput type="file" (change)="showCropper = true; cropping.selectInputEvent($event)" accept="image/*" hidden />
+              </div>
+
+              <div *ngIf="cropping.isLoaded">
+                <button (click)="cropping.zoomIn()" ly-button size="small"><ly-icon>zoom_in</ly-icon></button>
+                <button (click)="cropping.zoomOut()" ly-button size="small"><ly-icon>zoom_out</ly-icon></button>
+                <button (click)="cropping.center()" ly-button size="small"><ly-icon>filter_center_focus</ly-icon></button>
+                <button (click)="cropping.rotate(-90)" ly-button size="small" ><ly-icon>rotate_90_degrees_ccw</ly-icon></button>
+                <button (click)="cropping.fit()" ly-button size="small"><ly-icon>fullscreen_exit</ly-icon></button>
+                <button (click)="cropping.setScale(1)" ly-button size="small"><ly-icon>unfold_less</ly-icon></button>
+                <button (click)="cancel(cropping)" ly-button size="small"><ly-icon>close</ly-icon></button>
+                <button *ngIf="cropping.isLoaded" color="accent" (click)="cropping.crop()" ly-button ><ly-icon>crop</ly-icon>crop</button>
+              </div>
+
+              <ly-img-cropper #cropping [withClass]="classes.cropping" [config]="myConfig" (cropped)="onCropped($event)"></ly-img-cropper>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <ng-template #loading>
+    Триває завантаження...
+  </ng-template>
+</div>

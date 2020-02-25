@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
@@ -16,9 +15,6 @@ import { ClickOutsideDirective } from './directives/clickOutside.directive';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { SelectComponent } from './components/select/select.component';
 import { AdminModule } from './admin/admin.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LyThemeModule, LY_THEME } from '@alyle/ui';
-import { MinimaLight } from '@alyle/ui/themes/minima';
 
 const firbaseConfig = {
   apiKey: 'AIzaSyDiFG-hQ8TecPQ_7r-u-Pfw1iwM1b-Nl7k',
@@ -51,10 +47,7 @@ const firbaseConfig = {
     AdminModule,
     AngularFireModule.initializeApp(firbaseConfig),
     AngularFireAuthModule,
-    BrowserAnimationsModule,
-    LyThemeModule.setTheme('minima-light')
   ],
-  providers: [{ provide: LY_THEME, useClass: MinimaLight, multi: true }],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

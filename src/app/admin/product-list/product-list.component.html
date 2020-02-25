@@ -3,7 +3,7 @@
     <div class="table-controls">
       <a class="button" tabindex="-1" routerLink="new"><i class="fa fa-plus"></i></a>
       <a class="button" tabindex="-1"><i class="fa fa-minus"></i></a>
-      <a class="button" tabindex="-1"><i class="fa fa-pen"></i></a>
+      <a class="button" tabindex="-1" [ngClass]="{ 'disabled': !selected }" [routerLink]="['edit', selected ? selected.uuid : -1]"><i class="fa fa-pen"></i></a>
       <a class="button" tabindex="-1" (click)="refresh()"><i class="fa fa-sync"></i></a>
     </div>
     <table>
@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products" (click)="selected=product" [ngClass]="{ 'selected': selected === product }">
+        <tr *ngFor="let product of products" (click)="selected=product" (dblclick)="edit(product)" [ngClass]="{ 'selected': selected === product }">
           <td>{{ product.uuid }}</td>
           <td>{{ product.name }}</td>
           <td>{{ product.size }}</td>
