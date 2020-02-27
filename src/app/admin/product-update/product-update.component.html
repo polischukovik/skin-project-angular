@@ -1,7 +1,7 @@
 <div class="tab-body">
   <div class="table-controls">
     <a class="button" tabindex="-1" routerLink="../.."><i class="fas fa-less-than"></i></a>
-    <a class="button" tabindex="-1"><i class="fa fa-save"></i></a>
+    <a class="button" tabindex="-1" (click)="save()"><i class="fa fa-save"></i></a>
   </div>
   <form *ngIf="product$ | async; else loading" [formGroup]="form">
     <div class="row">

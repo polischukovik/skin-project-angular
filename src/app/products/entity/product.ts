@@ -6,4 +6,10 @@ export class Product {
   price: number;
   position: number;
   image: string;
+  // tslint:disable-next-line: variable-name
+  _links: {
+    self: {
+      href: string
+    }
+  };
 }

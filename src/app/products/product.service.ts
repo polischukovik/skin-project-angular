@@ -10,8 +10,6 @@ import { Product } from './entity/product';
 export class ProductService {
   products: Product[];
 
-  jsonURL = '../assets/products.json';
-
   constructor(private http: HttpClient) {
   }
 
@@ -26,6 +24,11 @@ export class ProductService {
 
   findOne(uuid: string): Observable<Product> {
     return this.http.get<Product>( `/api/v1/products/search/findByUuid?uuid=${uuid}` );
+  }
+
+  update(product: Product): Observable<Product> {
+    console.log(product._links.self.href);
+    return this.http.put<Product>(product._links.self.href.replace('http://localhost:8080', ''), product);
   }
 
   private handleError(error: HttpErrorResponse) {
