@@ -91,6 +91,7 @@ export class ProductUpdateComponent implements OnInit {
 
   save() {
     if (this.form.valid) {
+      Object.assign(this.product, this.form.value);
       this.productService.update(this.product).subscribe( _ => console.log(_) );
     }
   }

@@ -13,7 +13,11 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink='/cart'
-           [ngClass]="{ 'active': currentUrl =='/cart' }"><i class="fas fa-shopping-cart"></i> Кошик</a>
+           [ngClass]="{ 'active': currentUrl =='/cart' }">
+          <span class="fa-stack has-badge" [attr.data-count]="cartItemsCount">
+            <i class="fa fa-shopping-cart"></i>
+          </span>
+           Кошик</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink='/order'

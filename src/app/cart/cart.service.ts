@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Product } from '../products/entity/product';
 import { Item } from '../products/entity/item';
 
@@ -8,6 +8,8 @@ import { Item } from '../products/entity/item';
 export class CartService {
 
   constructor() {}
+
+  cartChanged = new EventEmitter();
 
   addToCart(product: Product) {
     const item: Item = { product, quantity: 1 };
@@ -32,6 +34,7 @@ export class CartService {
     }
 
     localStorage.setItem('cart', JSON.stringify(items));
+    this.cartChanged.emit();
   }
 
   remove(product: Product): void {
@@ -45,6 +48,7 @@ export class CartService {
     }
 
     localStorage.setItem('cart', JSON.stringify(items));
+    this.cartChanged.emit();
   }
 
   getTotal(): number {
@@ -57,7 +61,18 @@ export class CartService {
     return total;
   }
 
-  getAllCartItems() {
+  getCount(): number {
+    let result = 0;
+
+    const items = this.getAllCartItems();
+    if (!this.isIterable(items)) { return result; }
+    for (const item of items) {
+      result += item.quantity;
+    }
+    return result;
+  }
+
+  getAllCartItems(): any[] {
     const items = [];
     const storageItems = JSON.parse(localStorage.getItem('cart'));
     if (!this.isIterable(storageItems)) { return []; }
